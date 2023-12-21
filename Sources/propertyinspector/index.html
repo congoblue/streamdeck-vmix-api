@@ -92,13 +92,11 @@
             </div>
             <div id="response_parse_container" style="display:none">
                 <details>
-                    <summary>Expand for Response parsing instructions</summary>
-                    <p>Specify the JSON path and expected value in the API response to choose which image to show on the key.</p>
-                    <p>A missing path will search for the expected value as a string anywhere in the response body.</p>
-                    <p>A missing expected value will treat the field at the JSON path as a Boolean, where <code>true</code> is considered "matched".</p>
+                    <summary>Expand for XML Response parsing instructions</summary>
+                    <p>Specify the XML field and expected value in the API response to choose which image to show on the key.</p>
                 </details>
                 <div class="sdpi-item">
-                    <div class="sdpi-item-label">JSON Path</div>
+                    <div class="sdpi-item-label">XML field</div>
                     <input class="sdpi-item-value" type="text" id="response_parse_field">
                 </div>
                 <div class="sdpi-item">
@@ -162,7 +160,7 @@
                     </div>
                     <div id="poll_status_parse_container" style="display:none">
                         <div class="sdpi-item">
-                            <div class="sdpi-item-label">JSON Path</div>
+                            <div class="sdpi-item-label">XML field</div>
                             <input class="sdpi-item-value" type="text" id="poll_status_parse_field">
                         </div>
                         <div class="sdpi-item">

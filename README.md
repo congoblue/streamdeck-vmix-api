@@ -17,49 +17,50 @@ changes in state.
 * Path to an XML field in the VMix status response, and expected matching value
 * See below for typical XML response from VMix
 
-## Getting Started
+## Getting Started on plugin editing
 Getting started with Stream Deck.
 
 The fastest way to get started with Stream Deck is using the plugin template.
-1. Stream Deck Plugin Template
-  Checkout the plugin template from 
-​
-  `git clone https://github.com/elgatosf/streamdeck-plugin-template
+1.  Stream Deck Plugin Template
+    * Checkout the plugin template from 
+ `git clone https://github.com/elgatosf/streamdeck-plugin-template`
 
 2. Refactor the Unique Identifier
-  Rename the folder com.elgato.template.sdPlugin using 
-  , i.e. com.example-url.plugin-name.sdPlugin. Replace any reference to com.elgato.template in the manifest.json and app.js.
+   * Rename the folder `com.elgato.template.sdPlugin` using i.e. `com.example-url.plugin-name.sdPlugin`. Replace any reference to `com.elgato.template` in the manifest.json and app.js.
 3. Javascript Libraries
-The Javascript SDK communicates with the Stream Deck websocket and listens for events. Clone this library into the plugin folder or add it as a git submodule.
-Clone
-`git clone https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs
-Add Submodule
-`git submodule add https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs
+   * The Javascript SDK communicates with the Stream Deck websocket and listens for events. Clone this library into the plugin folder or add it as a git submodule.
+   * Clone
+`git clone https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs`
+
+   * Add Submodule
+`git submodule add https://github.com/elgatosf/streamdeck-javascript-sdk src/my.domain.plugin-name/libs`
 4. Add the Plugin to Stream Deck
-Create a symbolic link of the plugin's folder inside of the Stream Decks Plugins folder.
-Windows SymLink
-# Note: this works inside the cmd, not on PowerShell
-# %cd% gets the full absolute path to the plugin folder
-`mklink /D C:\Users\%USERNAME%\AppData\Roaming\Elgato\StreamDeck\Plugins\com.example.my-plugin.sdPlugin %cd%\src\com.example.my-plugin.sdPlugin
-macOS SymLink
-# Using $(pwd) to get the full absolute path to the plugin folder
-`ln -s $(pwd)/src/com.example.my-plugin.sdPlugin ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins/
+   * Create a symbolic link of the plugin's folder inside of the Stream Decks Plugins folder.
+   * Windows SymLink
+(Note: this works inside the cmd, not on PowerShell.
+ %cd% gets the full absolute path to the plugin folder)
+`mklink /D C:\Users\%USERNAME%\AppData\Roaming\Elgato\StreamDeck\Plugins\com.example.my-plugin.sdPlugin %cd%\src\com.example.my-plugin.sdPlugin`
+   * macOS SymLink
+(Using \$(pwd) to get the full absolute path to the plugin folder)
+`ln -s $(pwd)/src/com.example.my-plugin.sdPlugin ~/Library/Application\ Support/com.elgato.StreamDeck/Plugins/`
 5. Debugging
-Set the html_remote_debugging_enabled flag and restart Stream Deck. A list of plugins available for debugging are now available from a browser at http://localhost:23654/. Refresh the plugin or property inspector at any time by reloading it's page (Changes to the manifest.json will still require restarting Stream Deck).
-With debugging enable, you can also debug the property inspector (user interface) of your plugins. 
-.
-macOS Debugging
-defaults write com.elgato.StreamDeck html_remote_debugging_enabled -bool YES
-Windows Debugging
-On Windows, add a DWORD html_remote_debugging_enabled with value 1 in the registry @HKEY_CURRENT_USER\Software\Elgato Systems GmbH\StreamDeck.
+   * Set the `html_remote_debugging_enabled` flag and restart Stream Deck. A list of plugins available for debugging are now available from a browser at `http://localhost:23654/`. Refresh the plugin or property inspector at any time by reloading its page (Changes to the manifest.json will still require restarting Stream Deck).
+   * With debugging enable, you can also debug the property inspector (user interface) of your plugins. 
+
+   * macOS Debugging:
+`defaults write com.elgato.StreamDeck html_remote_debugging_enabled -bool YES`
+   * Windows Debugging: 
+On Windows, add a DWORD `html_remote_debugging_enabled` with value 1 in the registry `@HKEY_CURRENT_USER\Software\Elgato Systems GmbH\StreamDeck`.
+
 6. Build the Plugin
-Everything is now configured to build a Stream Deck plugin!
+*  Everything is now configured to build a Stream Deck plugin!
 
 
-## Typical VMix status response
+## Typical VMix XML status response
 
 Send `http://127.0.0.1:8088/api`
 
+```
   <vmix>
   <version>23.0.0.57</version>
   <edition>Basic</edition>
@@ -94,3 +95,4 @@ Send `http://127.0.0.1:8088/api`
   <master volume="100" muted="False" meterF1="0" meterF2="0" headphonesVolume="100"/>
   </audio>
   </vmix>
+```  
