@@ -22,12 +22,13 @@ Getting started with Stream Deck.
 
 The fastest way to get started with Stream Deck is using the plugin template.
 1. Stream Deck Plugin Template
-Checkout the plugin template from 
+  Checkout the plugin template from 
 ​
-`git clone https://github.com/elgatosf/streamdeck-plugin-template
+  `git clone https://github.com/elgatosf/streamdeck-plugin-template
+
 2. Refactor the Unique Identifier
-Rename the folder com.elgato.template.sdPlugin using 
-, i.e. com.example-url.plugin-name.sdPlugin. Replace any reference to com.elgato.template in the manifest.json and app.js.
+  Rename the folder com.elgato.template.sdPlugin using 
+  , i.e. com.example-url.plugin-name.sdPlugin. Replace any reference to com.elgato.template in the manifest.json and app.js.
 3. Javascript Libraries
 The Javascript SDK communicates with the Stream Deck websocket and listens for events. Clone this library into the plugin folder or add it as a git submodule.
 Clone
