@@ -2,20 +2,20 @@
     "Actions": [
         {
             "Icon": "images/api_action",
-            "Name": "API Request",
+            "Name": "Tims VMix buttons",
             "States": [
                 { "Image": "images/api_key" }
             ],
             "Tooltip": "Make an API Request",
-            "UUID": "com.github.mjbnz.sd-api-request"
+            "UUID": "com.github.congoblue.streamdeck-vmix-api"
         }
     ],
     "SDKVersion": 2,
-    "Author": "mjbnz",
+    "Author": "congoblue",
     "CodePath": "index.html",
     "PropertyInspectorPath": "propertyinspector/index.html",
     "Description": "REST Easily",
-    "Name": "API Request",
+    "Name": "Tims VMix buttons",
     "Icon": "images/api_action",
     "Category": "API Request",
     "CategoryIcon": "images/api_action",  

@@ -1,9 +1,9 @@
 {
   "Description": "REST Easily", 
-  "Name": "API Request", 
-  "com.github.mjbnz.sd-api-request": {
-    "Name": "API Request", 
-    "Tooltip": "Make an API Request"
+  "Name": "Tims VMix buttons", 
+  "com.github.congoblue.streamdeck-vmix-api": {
+    "Name": "VMix API", 
+    "Tooltip": "Send VMix API command"
   },
   
   "Localization": {

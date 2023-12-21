@@ -16,14 +16,14 @@ jobs:
       - name: Prepare directories and files
         run: |
           mkdir release
-          move Sources com.github.mjbnz.sd-api-request.sdPlugin
-          move LICENCE com.github.mjbnz.sd-api-request.sdPlugin\LICENCE
+          move Sources com.github.congoblue.streamdeck-vmix-api.sdPlugin
+          move LICENCE com.github.congoblue.streamdeck-vmix-api.sdPlugin\LICENCE
 
       # Build StreamDeck plugin
       - name: StreamDeck Distribution Tool
         uses: AdamCarballo/streamdeck-distribution-tool@v1
         with:
-          input: com.github.mjbnz.sd-api-request.sdPlugin
+          input: com.github.congoblue.streamdeck-vmix-api.sdPlugin
           output: release
 
       # Create Release
@@ -44,8 +44,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release\com.github.mjbnz.sd-api-request.streamDeckPlugin
-          asset_name: com.github.mjbnz.sd-api-request.streamDeckPlugin
+          asset_path: release\com.github.congoblue.streamdeck-vmix-api.streamDeckPlugin
+          asset_name: com.github.congoblue.streamdeck-vmix-api.streamDeckPlugin
           asset_content_type: application/zip
 
       - name: Publish draft release

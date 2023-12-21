@@ -4,22 +4,22 @@ $SD.on('connected', conn => connected(conn));
 function connected(jsn) {
     debugLog('Connected Plugin:', jsn);
 
-    $SD.on('com.github.mjbnz.sd-api-request.didReceiveSettings', jsonObj =>
+    $SD.on('com.github.congoblue.streamdeck-vmix-api.didReceiveSettings', jsonObj =>
         action.onDidReceiveSettings(jsonObj)
     );
-    $SD.on('com.github.mjbnz.sd-api-request.willAppear', jsonObj =>
+    $SD.on('com.github.congoblue.streamdeck-vmix-api.willAppear', jsonObj =>
         action.onWillAppear(jsonObj)
     );
-    $SD.on('com.github.mjbnz.sd-api-request.willDisappear', jsonObj =>
+    $SD.on('com.github.congoblue.streamdeck-vmix-api.willDisappear', jsonObj =>
         action.onWillDisappear(jsonObj)
     );
-    $SD.on('com.github.mjbnz.sd-api-request.keyUp', jsonObj =>
+    $SD.on('com.github.congoblue.streamdeck-vmix-api.keyUp', jsonObj =>
         action.onKeyUp(jsonObj)
     );
 }
 
 var action = {
-    type: 'com.github.mjbnz.sd-api-request',
+    type: 'com.github.congoblue.streamdeck-vmix-api',
     cache: {},
 
     onDidReceiveSettings: function(jsn) {
@@ -175,13 +175,15 @@ function APIRequest(jsonObj) {
         if (!settings.advanced_settings || !settings.response_parse || !settings.image_matched || !settings.image_unmatched)
             return;
 
-        let json, body;
+        let resptext, body;
         var new_key_state = key_state;
 
         const prefix = (do_status_poll && settings.poll_status && settings.poll_status_parse) ? 'poll_status' : 'response';
         const field  = Utils.getProp(settings, `${prefix}_parse_field`, undefined);
         const value  = Utils.getProp(settings, `${prefix}_parse_value`, undefined);
 
+        //original version - JSON response
+        /*
         if (field  !== undefined && value !== undefined) {
             json = await resp.json();
             new_key_state = (Utils.getProperty(json, field) == value);
@@ -191,6 +193,15 @@ function APIRequest(jsonObj) {
         } else if (value !== undefined) {
             body = await resp.text();
             new_key_state = body.includes(value);
+        }
+        */
+
+        //modified version - XML response from VMix
+        if (field  !== undefined && value !== undefined) {
+            resptext = await resp.text();
+            parser = new DOMParser();
+            xmlDoc = parser.parseFromString(resptext,"text/xml");
+            new_key_state = (xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue == value);
         }
 
         if (new_key_state == key_state) return;
