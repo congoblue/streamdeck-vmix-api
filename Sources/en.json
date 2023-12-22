@@ -2,7 +2,7 @@
   "Description": "REST Easily", 
   "Name": "Tims VMix buttons", 
   "com.github.congoblue.streamdeck-vmix-api": {
-    "Name": "VMix API", 
+    "Name": "VMix general API", 
     "Tooltip": "Send VMix API command"
   },
   

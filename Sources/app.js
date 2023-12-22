@@ -13,7 +13,7 @@ function connected(jsn) {
     $SD.on('com.github.congoblue.streamdeck-vmix-api.willDisappear', jsonObj =>
         action.onWillDisappear(jsonObj)
     );
-    $SD.on('com.github.congoblue.streamdeck-vmix-api.keyUp', jsonObj =>
+    $SD.on('com.github.congoblue.streamdeck-vmix-api.keyDown', jsonObj =>
         action.onKeyUp(jsonObj)
     );
 }
@@ -196,12 +196,19 @@ function APIRequest(jsonObj) {
         }
         */
 
+        log('field:', field);
+
         //modified version - XML response from VMix
         if (field  !== undefined && value !== undefined) {
             resptext = await resp.text();
+            if (resptext.indexOf("vmix")>0)
+            {
             parser = new DOMParser();
             xmlDoc = parser.parseFromString(resptext,"text/xml");
             new_key_state = (xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue == value);
+            //log('state:', new_key_state);
+            log('state:', xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue);
+            }
         }
 
         if (new_key_state == key_state) return;
@@ -212,7 +219,8 @@ function APIRequest(jsonObj) {
                     ? settings.image_matched
                     : settings.image_unmatched;
 
-        log('updateImage(): FILE:', path, 'JSON:', json, 'BODY:', body);
+        //log('updateImage(): FILE:', path, 'JSON:', json, 'BODY:', body);
+        log('updateImage(): FILE:', path);
 
         Utils.loadImage(path, img => $SD.api.setImage(context, img));
 

@@ -17,6 +17,9 @@ changes in state.
 * Path to an XML field in the VMix status response, and expected matching value
 * See below for typical XML response from VMix
 
+### Setting icons
+* Note, no button icon must be set in the Streamdeck App. If you've allocated a button icon yourself then the API cannot change it. Click on the "Down" arrow on the button image and select "Reset to Default". The icon set by the API should then show up.
+
 ## Getting Started on plugin editing
 Getting started with Stream Deck.
 

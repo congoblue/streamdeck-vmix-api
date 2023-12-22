@@ -19,7 +19,7 @@
     "Icon": "images/api_action",
     "Category": "API Request",
     "CategoryIcon": "images/api_action",  
-    "URL": "https://github.com/mjbnz/sd-api-request/",
+    "URL": "https://github.com/congoblue/streamdeck-vmix-api/",
     "Version": "0.2",
     "OS": [
         { "Platform": "mac",     "MinimumVersion": "10.11" },
