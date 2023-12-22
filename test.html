@@ -1,0 +1,29 @@
+<html>
+<head>
+
+</head>
+<body>
+    <script>
+    function getElement(xmltext,elname)
+    {
+        ds=xmltext.indexOf("<"+elname);
+        dc=xmltext.indexOf(">",ds);
+        if (ds!=0) de=xmltext.indexOf("<",dc);
+
+        return xmltext.slice(dc+1,de);
+    }
+
+        var xml=' <vmix>  <version>23.0.0.57</version>  <edition>Basic</edition>  <inputs>  <input key="695b6d65-3548-47f9-9a08-bcddf967265e" number="1" type="Blank" title="Blank" shortTitle="Blank" state="Paused" position="0" duration="0" loop="False">Blank</input>  <input key="bb198a82-d7a0-463e-b4c0-c97187b784cc" number="2" type="Blank" title="Blank" shortTitle="Blank" state="Paused" position="0" duration="0" loop="False">Blank</input>  </inputs>  <overlays><overlay number="1">7</overlay><overlay number="2">5</overlay><overlay number="3"/><overlay number="4"/><overlay number="5"/><overlay number="6"/><overlay number="7"/><overlay number="8"/></overlays><recording>False</recording><external>False</external><streaming>False</streaming>  </vmix>'
+        resptext = xml;
+            if (resptext.indexOf("vmix")>0)
+            {
+            //parser = new DOMParser();
+            //xmlDoc = parser.parseFromString(resptext,"text/xml");
+            //log('state:', new_key_state);
+            var field='overlay number="1"';
+            //var field='recording';
+            document.write(getElement(resptext,field));
+            }
+    </script>
+</body>
+</html>

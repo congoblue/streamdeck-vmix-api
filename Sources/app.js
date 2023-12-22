@@ -171,6 +171,14 @@ function APIRequest(jsonObj) {
         return resp;
     }
 
+    function getElement(xmltext,elname)
+    {
+        ds=xmltext.indexOf("<"+elname);
+        dc=xmltext.indexOf(">",ds);
+        if (ds!=0) de=xmltext.indexOf("<",dc);
+        return xmltext.slice(dc+1,de);
+    }
+
     async function updateImage(resp, do_status_poll) {
         if (!settings.advanced_settings || !settings.response_parse || !settings.image_matched || !settings.image_unmatched)
             return;
@@ -203,11 +211,12 @@ function APIRequest(jsonObj) {
             resptext = await resp.text();
             if (resptext.indexOf("vmix")>0)
             {
-            parser = new DOMParser();
-            xmlDoc = parser.parseFromString(resptext,"text/xml");
-            new_key_state = (xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue == value);
+            //parser = new DOMParser();
+            //xmlDoc = parser.parseFromString(resptext,"text/xml");
+            //new_key_state = (xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue == value);
+            new_key_state = (getElement(resptext,field) == value);
             //log('state:', new_key_state);
-            log('state:', xmlDoc.getElementsByTagName(field)[0].childNodes[0].nodeValue);
+            log('state:', getElement(resptext,field));
             }
         }
 
