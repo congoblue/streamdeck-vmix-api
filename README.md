@@ -1,26 +1,48 @@
 # StreamDeck VMix API Request Plugin
 
-A Plugin for the Elgato Stream Deck for sending VMix commands using API requests.
+A Plugin for the Elgato Stream Deck for sending VMix commands using API requests and reading back VMix status to give feedback using the button icon.
 
-Additionally, the plugin can poll a (different, if required) API at a
-pre-determined interval in order to update the key icon to reflect external
-changes in state.
+This allows you to create StreamDeck buttons which change state to indicate the current state of VMix, for example a Record button which turns red when recording.
 
-### Features:
-* Specifying HTTP Method, Headers, and Body if applicable
-* Parsing of request response to set key icon
-* Periodic Polling of VMix status API
-* Polling of status on startup, configuration changes, and upon initial display
-  (when changing to a streamdeck profile with the plugin visible)
+Based on https://github.com/mjbnz/streamdeck-api-request
 
-### Response parsing supports:
-* Path to an XML field in the VMix status response, and expected matching value
-* See below for typical XML response from VMix
+## Installing the plugin
 
-### Setting icons
-* Note, no button icon must be set in the Streamdeck App. If you've allocated a button icon yourself then the API cannot change it. Click on the "Down" arrow on the button image and select "Reset to Default". The icon set by the API should then show up.
+* Go to the Streamdeck plugins folder at `C:\Users\%USERNAME%\AppData\Roaming\Elgato\StreamDeck\Plugins\`
+* Create a folder for this plugin called `com.github.congoblue\streamdeck-vmix-api.sdPlugin`
+* Copy the contents of the `\sources` folder into this new folder
+* Shut down the Streamdeck software and restart it
+* The VMix API Request plugin should now be listed in the Streamdeck software.
 
-## Getting Started on plugin editing
+## Set plugin options to control VMix
+
+For this example we will create a button which starts/stops recording and shows the recording status.
+
+* See https://vmixapi.com/ for list of the API functions available
+* Drag the "API Request" plugin onto one of the buttons in the Streamdeck software.
+* Set the title to give the Streamdeck button caption (in this example, `REC`). Use the [T] menu next to the Title to position the caption and set the font.
+* Set the URL option to `http://127.0.0.1:8088/api/Function=StartStopRecording` (replace the `Function=` parameter with desired API command)
+* Tick the [Enable Advanced Settings] box.
+* Tick the [Set Button Image based on response] box.
+* Using the VMix XML status below, identify the XML field in the response which gives the status of the function you're controlling. In this case it is `<recording>`.
+* Set [XML Field] to the fieldname (in this example `recording`)
+* Set [Expected Value] to the field value when the function is active (in this example `True` (case sensitive)).
+* Set [Image to display when matched] to the button icon when the function is active. In this case we will use `rec_active.png` from the images folder
+* Set [Image to display when matched] to the button icon when the function is inactive. In this case we will use `rec_inactive.png` from the images folder
+* Tick the [Periodically poll a URL for status] box.
+* Set [Status URL] to `http://127.0.0.1:8088/api`
+* Set [Poll Frequency] to `1 second`.
+
+If you have VMix running, the Streamdeck button should now show "REC" with a grey or red icon depending on if recording is active or not. Pressing the button (or using the VMix UI) should change the state.
+
+> If VMix is not running the button will show a yellow exclamation.
+
+### If the button icon does not change state
+
+> No button icon must be set in the Streamdeck App. If you've allocated a button icon yourself then the API cannot change it. Click on the "Down" arrow on the button image and select "Reset to Default". The icon set by the API should then show up.
+
+## Notes on creating a plugin for Streamdeck
+
 Getting started with Stream Deck.
 
 The fastest way to get started with Stream Deck is using the plugin template.
