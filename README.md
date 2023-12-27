@@ -18,8 +18,10 @@ Based on https://github.com/mjbnz/streamdeck-api-request
 
 For this example we will create a button which starts/stops recording and shows the recording status.
 
+![Streamdeck plugin settings](apibutton1.png)
+
 * See https://vmixapi.com/ for list of the API functions available
-* Drag the "API Request" plugin onto one of the buttons in the Streamdeck software.
+* Drag the "VMix general API" plugin onto one of the buttons in the Streamdeck software.
 * Set the title to give the Streamdeck button caption (in this example, `REC`). Use the [T] menu next to the Title to position the caption and set the font.
 * Set the URL option to `http://127.0.0.1:8088/api/Function=StartStopRecording` (replace the `Function=` parameter with desired API command)
 * Tick the [Enable Advanced Settings] box.
@@ -34,6 +36,10 @@ For this example we will create a button which starts/stops recording and shows 
 * Set [Poll Frequency] to `1 second`.
 
 If you have VMix running, the Streamdeck button should now show "REC" with a grey or red icon depending on if recording is active or not. Pressing the button (or using the VMix UI) should change the state.
+
+Copy and paste this button to create other similar buttons without having to enter all the setup info again.
+
+![Streamdeck plugin example setup](example.jpg)
 
 > If VMix is not running the button will show a yellow exclamation.
 
